@@ -1,11 +1,21 @@
 pins.onPulsed(DigitalPin.P2, PulseValue.High, function () {
-	RobotRight(100)
-    basic.pause(500)
-    if(state == 0) RobotStop()
-    if(state == 1) RobotForward(100)
-    if(state == 2) RobotBack(100)
-    if(state == 3) RobotLeft(100)
-    if(state == 4) RobotRight(100)
+    RobotRight(100)
+    basic.pause(100)
+    if (state == 0) {
+        RobotStop()
+    }
+    if (state == 1) {
+        RobotForward(100)
+    }
+    if (state == 2) {
+        RobotBack(100)
+    }
+    if (state == 3) {
+        RobotLeft(100)
+    }
+    if (state == 4) {
+        RobotRight(100)
+    }
 })
 function RobotStop () {
     PCA9685.setLedDutyCycle(PCA9685.LEDNum.LED1, 0, 67)
@@ -36,7 +46,27 @@ function RobotBack (speed: number) {
     PCA9685.setLedDutyCycle(PCA9685.LEDNum.LED3, 100, 67)
     PCA9685.setLedDutyCycle(PCA9685.LEDNum.LED4, speed, 67)
 }
+pins.onPulsed(DigitalPin.P11, PulseValue.High, function () {
+    RobotLeft(100)
+    basic.pause(100)
+    if (state == 0) {
+        RobotStop()
+    }
+    if (state == 1) {
+        RobotForward(100)
+    }
+    if (state == 2) {
+        RobotBack(100)
+    }
+    if (state == 3) {
+        RobotLeft(100)
+    }
+    if (state == 4) {
+        RobotRight(100)
+    }
+})
 function ReadSonarDistance () {
+    let distance = 0
     serial.writeString("Ditance is ")
     serial.writeNumber(distance)
     serial.writeString("cm")
@@ -96,7 +126,6 @@ function RobotRight (speed: number) {
 let R_Sensor = 0
 let L_Sensor = 0
 let IR_Value = 0
-let distance = 0
 let state = 0
 let previous_state = 0
 let strip = neopixel.create(DigitalPin.P5, 18, NeoPixelMode.RGB)
